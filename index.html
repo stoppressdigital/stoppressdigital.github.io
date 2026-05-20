@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StopPress Digital — Branding &amp; Marketing Studio | Orlando, FL</title>
+<meta name="description" content="StopPress Digital is a boutique branding and marketing studio in Orlando, FL. Brand identity, ongoing marketing, and launch campaigns for owner-operated businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#fff;color:#1C2040;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-tap-highlight-color:transparent;text-rendering:optimizeLegibility}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button{font-family:'DM Sans',system-ui,sans-serif;cursor:pointer;border:none;background:none;touch-action:manipulation}
+
+/* ── TOKENS ── */
+:root{
+  --navy:#1C2040; --deep:#13162E; --mid-navy:#232848;
+  --gold:#F2A800; --gold-l:#F7C040;
+  --blue:#3B6ED4;
+  --cream:#F7F4EE; --white:#fff;
+  --muted:#686D8E;
+  --bdr:rgba(29,33,65,.11); --bdr-i:rgba(255,255,255,.09);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --nh:76px; --pad:clamp(72px,10vw,128px); --g:clamp(20px,5vw,56px); --wrap:1180px;
+}
+
+/* ── TYPE ── */
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.05;letter-spacing:-.02em}
+h1{font-size:clamp(46px,8vw,106px)}
+h2{font-size:clamp(34px,5vw,68px)}
+h3{font-size:clamp(20px,2.8vw,36px)}
+p{font-size:clamp(14px,1.1vw,16px);line-height:1.78;color:var(--muted)}
+
+/* ── LAYOUT ── */
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--g)}
+.lbl{display:block;font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+
+/* ── BUTTONS ── */
+.btn-gold{display:inline-flex;align-items:center;padding:15px 34px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,transform .15s;border-radius:2px}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-out{display:inline-flex;align-items:center;padding:14px 32px;background:transparent;color:var(--navy);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid var(--navy);transition:background .2s,color .2s;border-radius:2px}
+.btn-out:hover{background:var(--navy);color:#fff}
+.btn-ghost{display:inline-flex;align-items:center;gap:12px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:color .2s}
+.btn-ghost::after{content:'';display:block;width:24px;height:1px;background:currentColor;transition:width .3s}
+.btn-ghost:hover{color:rgba(255,255,255,.85)}
+.btn-ghost:hover::after{width:40px}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none}
+.page.active{display:block;animation:pfade .42s ease both}
+@keyframes pfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;height:var(--nh);z-index:200;transition:background .32s,box-shadow .32s}
+#nav.solid{background:rgba(19,22,46,.98);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--bdr-i)}
+.nav-w{height:var(--nh);display:flex;align-items:center;justify-content:space-between;padding:0 var(--g) 0 clamp(16px,2.5vw,32px)}
+.nav-logo{display:flex;align-items:center;gap:11px;cursor:pointer}
+/* icon: always visible, transitions fill between dark navy (at top) and gold (scrolled) */
+.logo-svg{height:17px;width:auto;fill:#F2A800;transition:fill .38s ease}
+/* wordmark: hidden at top, fades in on scroll */
+.nwm{font-size:14px;font-weight:600;color:var(--gold);letter-spacing:.01em;line-height:1.1;opacity:0;pointer-events:none;transition:opacity .38s ease}
+.nwm small{display:block;font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;opacity:.55;margin-top:2px}
+/* nav links: hidden at top, fade in on scroll */
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;opacity:0;pointer-events:none;transition:opacity .38s ease}
+/* hamburger: hidden at top, fades in on scroll */
+.nav-hbg{display:none;flex-direction:column;gap:5px;padding:6px;opacity:0;pointer-events:none;transition:opacity .38s ease}
+/* ── SCROLLED STATE: everything reveals ── */
+#nav.scrolled .logo-svg{fill:#F2A800}
+#nav.scrolled .nwm{opacity:1;pointer-events:auto}
+#nav.scrolled .nav-links{opacity:1;pointer-events:auto}
+#nav.scrolled .nav-hbg{opacity:1;pointer-events:auto}
+/* ── AT TOP: icon flips dark so it reads on the gold corner ── */
+#nav:not(.scrolled) .logo-svg{fill:var(--deep)}
+.nbtn{padding:4px 0;background:none;border:none;display:flex;flex-direction:column;align-items:flex-start}
+.np{display:block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:color .2s}
+.ns{display:block;font-size:9px;font-weight:400;letter-spacing:.04em;color:rgba(255,255,255,.24);margin-top:2px}
+.nbtn:hover .np,.nbtn.active .np{color:var(--gold)}
+.nav-cta{padding:9px 22px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;border-radius:2px}
+.nav-cta:hover{background:var(--gold-l)}
+.nav-hbg span{display:block;width:22px;height:1.5px;background:var(--gold);transition:transform .3s,opacity .3s}
+.nav-hbg.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hbg.open span:nth-child(2){opacity:0}
+.nav-hbg.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(max-width:840px){
+  .nav-links{display:none;position:fixed;top:var(--nh);left:0;right:0;background:var(--deep);flex-direction:column;align-items:center;gap:0;padding:20px var(--g) 36px;border-top:1px solid var(--bdr-i);opacity:1;pointer-events:auto}
+  .nav-links.open{display:flex}
+  .nav-item{width:100%;text-align:center}
+  .nbtn{padding:14px 0;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .np{font-size:13px;text-align:center}
+  .ns{text-align:center}
+  .nav-hbg{display:flex}
+  .nav-cta{margin-top:6px;min-height:44px;display:inline-flex;align-items:center}
+}
+
+/* ── FOOTER ── */
+.ft{background:var(--deep);padding:68px var(--g) 34px}
+.ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--bdr-i);margin-bottom:28px}
+.ft-logo{margin-bottom:16px}
+.ft-tag{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(255,255,255,.34);line-height:1.55;margin-bottom:18px}
+.ft-loc{font-size:12px;color:rgba(255,255,255,.24);display:flex;align-items:center;gap:7px}
+.ft-loc::before{content:'◎';color:var(--gold);font-size:9px}
+.ft-col h5{font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.27);margin-bottom:20px}
+.ft-nav{list-style:none}
+.ft-nav li{margin-bottom:11px}
+.ft-nav button{font-size:13px;color:rgba(255,255,255,.5);transition:color .2s;padding:0}
+.ft-nav button:hover{color:var(--gold)}
+.ft-contact a{display:block;font-size:13px;color:rgba(255,255,255,.5);margin-bottom:10px;transition:color .2s}
+.ft-contact a:hover{color:var(--gold)}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ft-copy{font-size:11px;color:rgba(255,255,255,.2)}
+.ft-stamp{font-size:11px;color:rgba(255,255,255,.14);font-family:var(--serif);font-style:italic}
+@media(max-width:760px){.ft-top{grid-template-columns:1fr}}
+
+/* ── PAGE HERO (inner pages) ── */
+.pg-hero{background:var(--deep);padding:calc(var(--nh) + 68px) var(--g) 68px;position:relative;overflow:hidden}
+.pg-hi{max-width:var(--wrap);margin:0 auto;position:relative;z-index:2}
+.pg-hero .lbl{color:rgba(242,168,0,.65)}
+.pg-hero h1{color:#fff;max-width:680px}
+.pg-sub{font-size:clamp(15px,1.4vw,18px);color:rgba(255,255,255,.44);max-width:500px;margin-top:20px;line-height:1.65}
+.gold-corner{position:absolute;top:0;left:0;width:clamp(96px,14vw,210px);height:clamp(96px,14vw,210px);background:var(--gold);border-radius:0 0 100% 0;opacity:.9;z-index:1;cursor:pointer;border:none;padding:0;transition:opacity .2s}
+.gold-corner:hover{opacity:1}
+.gold-corner:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+/* ── CTA SECTION ── */
+.cta-sec{padding:var(--pad) var(--g);background:var(--deep);text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(242,168,0,.05) 0%,transparent 70%);pointer-events:none}
+.cta-in{max-width:640px;margin:0 auto;position:relative;z-index:2}
+.cta-in .lbl{color:rgba(242,168,0,.55)}
+.cta-in h2{color:#fff;margin-bottom:18px}
+.cta-in p{color:rgba(255,255,255,.44);font-size:clamp(15px,1.5vw,17px);margin-bottom:42px}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap}
+
+/* ── REVEAL ANIMATIONS ── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .52s ease,transform .52s ease}
+.rv.show{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}.d5{transition-delay:.35s}
+
+/* ═══════════════════════════════
+   HOME PAGE
+═══════════════════════════════ */
+.hero{min-height:100vh;min-height:100svh;background:var(--deep);display:flex;flex-direction:column;justify-content:flex-end;padding:var(--nh) var(--g) 0;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 60% at 85% 40%,rgba(59,110,212,.14) 0%,transparent 65%),radial-gradient(ellipse 35% 40% at 5% 80%,rgba(242,168,0,.06) 0%,transparent 60%);pointer-events:none}
+.hero-content{max-width:var(--wrap);margin:0 auto;width:100%;padding-bottom:clamp(56px,8vw,96px);position:relative;z-index:2}
+.hero-ey{display:block;font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;opacity:0;animation:rise .7s ease .2s both}
+.hero h1{color:#fff;max-width:800px;margin-bottom:26px;opacity:0;animation:rise .75s ease .42s both}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:clamp(15px,1.4vw,19px);color:rgba(255,255,255,.46);max-width:480px;line-height:1.65;margin-bottom:46px;opacity:0;animation:rise .75s ease .62s both}
+.hero-acts{display:flex;align-items:center;gap:26px;flex-wrap:wrap;opacity:0;animation:rise .75s ease .8s both}
+.scroll-h{position:absolute;bottom:clamp(30px,5vw,58px);left:var(--g);display:flex;align-items:flex-end;gap:10px;z-index:2;opacity:0;animation:rise .75s ease 1.2s both}
+.scroll-l{width:1px;height:42px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.22));animation:spulse 2.2s ease-in-out infinite}
+.scroll-w{font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.24);writing-mode:vertical-rl}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spulse{0%,100%{opacity:.25}50%{opacity:.7}}
+
+.phi-bar{background:var(--gold);padding:24px var(--g)}
+.phi-in{max-width:var(--wrap);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.phi-st{font-family:var(--serif);font-size:clamp(17px,2.2vw,28px);font-weight:500;font-style:italic;color:var(--navy)}
+.phi-tg{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(29,33,65,.5);white-space:nowrap}
+
+/* services grid */
+.svc-sec{padding:var(--pad) var(--g);background:var(--cream)}
+.svc-hd{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:end;margin-bottom:clamp(44px,6vw,72px)}
+.svc-hd h2{max-width:460px}
+.svc-hd-r p{font-size:clamp(15px,1.5vw,17px);line-height:1.72}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.svc-card{background:#fff;padding:32px 36px 38px;position:relative;overflow:hidden;cursor:pointer;transition:background .3s}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .38s ease}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-card:hover{background:var(--deep)}
+.svc-card:hover .svc-n{color:rgba(255,255,255,.04)}
+.svc-card:hover .svc-nm{color:#fff}
+.svc-card:hover .svc-d{color:rgba(255,255,255,.4)}
+.svc-card:hover .svc-ar{color:var(--gold)}
+.svc-card:hover .svc-ar::after{width:30px}
+.svc-n{font-family:var(--serif);font-size:64px;font-weight:300;color:rgba(29,33,65,.05);line-height:1;margin-bottom:6px;transition:color .3s}
+.svc-nm{font-family:var(--serif);font-size:25px;font-weight:500;color:var(--navy);margin-bottom:13px;line-height:1.15;transition:color .3s}
+.svc-d{font-size:13px;line-height:1.76;color:var(--muted);margin-bottom:26px;transition:color .3s}
+.svc-ar{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);display:inline-flex;align-items:center;gap:10px;transition:color .3s}
+.svc-ar::after{content:'';display:block;width:17px;height:1px;background:currentColor;transition:width .3s}
+.svc-more{text-align:center;margin-top:32px}
+
+/* proof */
+.proof-sec{padding:var(--pad) var(--g);background:var(--navy);position:relative;overflow:hidden}
+.proof-sec::before{content:'';position:absolute;top:-170px;right:-170px;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(59,110,212,.13) 0%,transparent 70%);pointer-events:none}
+.proof-in{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center;position:relative;z-index:2}
+.proof-l .lbl{color:rgba(242,168,0,.65)}
+.proof-l h2{color:#fff;margin-bottom:18px}
+.proof-l p{color:rgba(255,255,255,.44);margin-bottom:34px}
+.pstats{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.pstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);padding:30px 26px}
+.pstat-n{display:block;font-family:var(--serif);font-size:clamp(30px,3.5vw,50px);font-weight:600;color:var(--gold);line-height:1;margin-bottom:9px}
+.pstat-l{font-size:12px;color:rgba(255,255,255,.34);line-height:1.5}
+.proof-cb{grid-column:1/-1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:15px 26px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.24)}
+
+/* about teaser */
+.at-sec{padding:var(--pad) var(--g);background:#fff}
+.at-grid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center}
+.at-l h2{margin-bottom:22px}
+.at-l p{font-size:clamp(14px,1.3vw,16px);margin-bottom:18px}
+.at-vals{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.vcard{background:var(--cream);padding:26px 22px}
+.vcard-t{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--navy);margin-bottom:9px;line-height:1.2}
+.vcard-b{font-size:12px;line-height:1.7;color:var(--muted)}
+
+/* sectors */
+.sectors-sec{padding:clamp(52px,7vw,84px) var(--g);background:var(--cream);border-top:1px solid var(--bdr)}
+.sec-hd{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:32px;flex-wrap:wrap}
+.sec-hd h3{font-size:clamp(19px,2.2vw,28px)}
+.stags{display:flex;flex-wrap:wrap;gap:8px}
+.stag{padding:8px 17px;border:1px solid var(--bdr);font-size:12px;color:var(--navy);border-radius:100px;transition:background .2s,border-color .2s;cursor:default}
+.stag:hover{background:var(--gold);border-color:var(--gold)}
+
+/* ═══════════════════════════════
+   WORK PAGE
+═══════════════════════════════ */
+.cs-sec{padding:var(--pad) var(--g);background:var(--cream)}
+.cs-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:2px;margin-bottom:2px}
+.cs-main{background:var(--navy);padding:56px 50px;position:relative;overflow:hidden}
+.cs-main::after{content:'';position:absolute;bottom:-90px;right:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(242,168,0,.1) 0%,transparent 70%);pointer-events:none}
+.cs-tag{display:inline-block;padding:5px 12px;background:rgba(242,168,0,.13);border:1px solid rgba(242,168,0,.28);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;border-radius:2px}
+.cs-main h2{color:#fff;font-size:clamp(28px,4vw,54px);margin-bottom:18px}
+.cs-main p{color:rgba(255,255,255,.43);font-size:15px;line-height:1.75;max-width:400px;margin-bottom:42px}
+.cs-mets{display:flex;gap:34px;flex-wrap:wrap}
+.csm-n{display:block;font-family:var(--serif);font-size:clamp(32px,3.5vw,46px);font-weight:600;color:var(--gold);line-height:1}
+.csm-l{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.26);margin-top:6px}
+.cs-side{background:#fff;padding:56px 42px;display:flex;flex-direction:column;justify-content:space-between;gap:36px}
+.cs-sl{font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block}
+.cs-st{font-family:var(--serif);font-size:21px;font-weight:500;color:var(--navy);line-height:1.3;margin-bottom:14px}
+.cs-side p{font-size:14px;line-height:1.77;color:var(--muted)}
+.cs-svcs{display:flex;flex-wrap:wrap;gap:7px}
+.cs-svc{padding:6px 13px;background:var(--cream);font-size:11px;color:var(--navy);border-radius:2px}
+.cs-links{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.cs-link{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--navy);padding:10px 14px;background:var(--cream);border-radius:2px;transition:background .2s,color .2s;font-weight:500}
+.cs-link:hover{background:var(--gold);color:var(--navy)}
+.cs-link-icon{font-size:14px;color:var(--gold);flex-shrink:0;transition:color .2s}
+.cs-link:hover .cs-link-icon{color:var(--navy)}
+.cs-quote{background:var(--deep);padding:24px 50px;font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(255,255,255,.38)}
+.cs-quote strong{font-style:normal;font-weight:400;color:rgba(255,255,255,.55)}
+.mw-sec{padding:clamp(52px,6vw,76px) var(--g);background:#fff}
+.mw-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:36px}
+.mw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.mw-card{background:var(--cream);aspect-ratio:5/4;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;position:relative}
+.mw-card::before{content:'In Progress';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(29,33,65,.18)}
+.mw-lbl{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(29,33,65,.28)}
+
+/* ═══════════════════════════════
+   SERVICES PAGE
+═══════════════════════════════ */
+.core-sec{padding:var(--pad) var(--g);background:var(--cream)}
+.or{display:grid;grid-template-columns:230px 1fr;gap:48px;padding:50px 0;border-top:1px solid var(--bdr);align-items:start}
+.or:last-of-type{border-bottom:1px solid var(--bdr)}
+.or-num{display:block;font-family:var(--serif);font-size:15px;font-weight:400;color:var(--gold);letter-spacing:.12em;margin-bottom:12px}
+.or-title{font-family:var(--serif);font-size:clamp(22px,2.5vw,32px);font-weight:500;color:var(--navy);line-height:1.1}
+.or-r h4{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--navy);margin-bottom:12px}
+.or-r p{font-size:14px;line-height:1.78;color:var(--muted);margin-bottom:16px}
+.or-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.or-tag{padding:6px 13px;background:#fff;border:1px solid var(--bdr);font-size:11px;color:var(--navy);border-radius:2px}
+.singles-sec{padding:var(--pad) var(--g);background:#fff}
+.singles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:42px}
+.sc{background:var(--cream);padding:30px 24px;transition:background .3s;cursor:pointer}
+.sc:hover{background:var(--navy)}
+.sc:hover .sc-t{color:#fff}
+.sc:hover .sc-d{color:rgba(255,255,255,.38)}
+.sc:hover .sc-tag{background:rgba(242,168,0,.15);color:var(--gold)}
+.sc-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);background:rgba(242,168,0,.1);padding:4px 10px;border-radius:2px;margin-bottom:16px;transition:background .3s,color .3s}
+.sc-t{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--navy);margin-bottom:9px;line-height:1.2;transition:color .3s}
+.sc-d{font-size:12px;line-height:1.72;color:var(--muted);transition:color .3s}
+.proc-bar{background:var(--navy);padding:26px var(--g)}
+.proc-in{max-width:var(--wrap);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.proc-st{font-family:var(--serif);font-size:clamp(15px,1.8vw,22px);font-style:italic;color:rgba(255,255,255,.7)}
+.proc-nt{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.24);white-space:nowrap}
+
+/* ═══════════════════════════════
+   ABOUT PAGE
+═══════════════════════════════ */
+.story-sec{padding:var(--pad) var(--g);background:#fff}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:start}
+.story-l h2{margin-bottom:26px}
+.story-l p{font-size:clamp(14px,1.3vw,16px);margin-bottom:18px}
+.mission-blk{background:var(--cream);padding:42px 36px;position:relative;margin-bottom:2px}
+.mission-blk::before{content:'';position:absolute;top:0;left:0;width:52px;height:3px;background:var(--gold)}
+.mlbl{font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:18px}
+.mtext{font-family:var(--serif);font-size:clamp(16px,1.8vw,22px);font-style:italic;font-weight:500;color:var(--navy);line-height:1.5}
+.vision-blk{background:var(--navy);padding:30px 36px}
+.vision-blk .mlbl{color:rgba(242,168,0,.55)}
+.vision-blk p{color:rgba(255,255,255,.44);font-size:14px;margin:0}
+.founders-sec{padding:var(--pad) var(--g);background:var(--cream)}
+.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px}
+.fc{background:#fff;padding:50px 42px;position:relative}
+.fc::before{content:'';position:absolute;top:0;left:0;width:68px;height:3px;background:var(--gold)}
+.fc-role{font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px}
+.fc-name{font-family:var(--serif);font-size:clamp(30px,3.5vw,44px);font-weight:500;color:var(--navy);margin-bottom:22px;line-height:1.0}
+.fc-bio{font-size:14px;line-height:1.8;color:var(--muted);margin-bottom:16px}
+.fc-focus{border-top:1px solid var(--bdr);padding-top:22px;display:flex;flex-direction:column;gap:9px;margin-top:6px}
+.fc-fi{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:10px}
+.fc-fi::before{content:'';display:block;width:14px;height:1px;background:var(--gold);margin-top:8px;flex-shrink:0}
+.vals-sec{padding:var(--pad) var(--g);background:var(--navy)}
+.vals-sec .lbl{color:rgba(242,168,0,.55)}
+.vals-sec h2{color:#fff;margin-bottom:48px;max-width:420px}
+.vals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.vi{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);padding:34px 30px}
+.vi-n{font-family:var(--serif);font-size:42px;font-weight:300;color:rgba(255,255,255,.05);line-height:1;margin-bottom:-4px}
+.vi-nm{font-family:var(--serif);font-size:21px;font-weight:500;color:#fff;margin-bottom:11px}
+.vi-d{font-size:13px;line-height:1.75;color:rgba(255,255,255,.37)}
+.mission-band{background:var(--gold);padding:var(--pad) var(--g);text-align:center}
+.mb-in{max-width:800px;margin:0 auto}
+.mb-lbl{font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(29,33,65,.45);display:block;margin-bottom:26px}
+.mb-txt{font-family:var(--serif);font-size:clamp(19px,2.6vw,34px);font-weight:500;font-style:italic;color:var(--navy);line-height:1.4}
+
+/* ═══════════════════════════════
+   CONTACT PAGE
+═══════════════════════════════ */
+.contact-sec{padding:var(--pad) var(--g);background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:68px;align-items:start}
+.cf-wrap{background:#fff;padding:50px 42px}
+.cf-title{font-family:var(--serif);font-size:32px;font-weight:500;color:var(--navy);margin-bottom:6px}
+.cf-sub{font-size:13px;color:var(--muted);margin-bottom:34px;line-height:1.65}
+.ff{margin-bottom:19px}
+.ff label{display:block;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
+.ff input,.ff select,.ff textarea{width:100%;padding:13px 14px;border:1.5px solid var(--bdr);background:var(--cream);font-family:var(--sans);font-size:16px;color:var(--navy);outline:none;appearance:none;-webkit-appearance:none;border-radius:2px;transition:border-color .2s,background .2s}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--gold);background:#fff}
+.ff textarea{min-height:108px;resize:vertical;line-height:1.6}
+.ff select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231C2040' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.f-submit{width:100%;padding:16px;background:var(--gold);color:var(--navy);font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s,transform .15s;margin-top:4px;border-radius:2px}
+.f-submit:hover{background:var(--gold-l)}
+.f-submit.confirmed{background:var(--navy);color:var(--gold);letter-spacing:.18em;transform:none;cursor:default}
+.f-submit:disabled{cursor:default}
+.f-note{font-size:11px;color:var(--muted);text-align:center;margin-top:13px;font-style:italic}
+.f-success{display:none;text-align:center;padding:52px 28px}
+.f-success.show{display:block}
+.f-check{width:50px;height:50px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:20px;color:var(--navy)}
+.f-success h3{font-family:var(--serif);font-size:26px;margin-bottom:11px}
+.f-success p{font-size:14px;color:var(--muted);max-width:300px;margin:0 auto}
+.ci{padding-top:4px}
+.ci-blk{margin-bottom:40px}
+.ci-lbl{font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px}
+.cp{border-top:1px solid var(--bdr);padding-top:20px;margin-bottom:20px}
+.cp-nm{font-family:var(--serif);font-size:25px;font-weight:500;color:var(--navy);margin-bottom:2px}
+.cp-role{font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--gold);display:block;margin-bottom:12px}
+.cp-d{display:block;font-size:15px;color:var(--navy);margin-bottom:6px}
+.cp-d a{color:var(--navy);transition:color .2s}
+.cp-d a:hover{color:var(--gold)}
+.how-blk{background:var(--cream);border-left:3px solid var(--gold);padding:22px 26px;margin-top:24px}
+.how-blk p{font-size:13px;line-height:1.78;color:var(--muted);margin:0}
+.ci-quote{background:var(--navy);padding:22px 26px;margin-top:2px}
+.ci-quote p{font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(255,255,255,.55);line-height:1.6;margin:0}
+
+/* ═══════════════════════════════
+   FOCUS & ACCESSIBILITY
+═══════════════════════════════ */
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+
+/* 1024 — singles grid trims from 4 to 3 columns */
+@media(max-width:1024px){
+  .singles-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* 860 — tablet portrait and below */
+@media(max-width:860px){
+  .svc-grid,.vals-grid,.founders-grid,.pstats,.at-vals{grid-template-columns:1fr 1fr}
+  .proof-in,.at-grid,.story-grid,.cs-grid,.contact-grid,.svc-hd{grid-template-columns:1fr;gap:40px}
+  .mw-grid,.singles-grid{grid-template-columns:1fr 1fr}
+  .or{grid-template-columns:1fr;gap:18px}
+  .scroll-h{display:none}
+  .phi-in,.proc-in{flex-direction:column;gap:10px}
+  .cta-btns{flex-direction:column;align-items:center;gap:14px}
+  .cta-btns .btn-gold,.cta-btns .btn-out{justify-content:center;min-width:220px}
+  .ft-top{grid-template-columns:1fr 1fr}
+  .cs-main{padding:44px 36px}
+  .cs-side{padding:44px 32px}
+  .cs-quote{padding:22px 36px}
+  .fc{padding:40px 32px}
+  .nbtn{min-height:44px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+  .nav-cta{min-height:44px;display:inline-flex;align-items:center}
+  .svc-hd-r p,.at-l p,.story-l p{font-size:15px}
+}
+
+/* 760 — footer collapses fully */
+@media(max-width:760px){
+  .ft-top{grid-template-columns:1fr}
+}
+
+/* 640 — service cards and other grids step down */
+@media(max-width:640px){
+  .svc-grid{grid-template-columns:1fr}
+  .at-vals{grid-template-columns:1fr}
+  .mw-grid{grid-template-columns:1fr 1fr}
+  .vals-grid{grid-template-columns:1fr 1fr}
+  .singles-grid{grid-template-columns:1fr 1fr}
+}
+
+/* 560 — mobile */
+@media(max-width:560px){
+  h1{font-size:clamp(34px,9vw,44px)}
+  h2{font-size:clamp(26px,7vw,34px)}
+  h3{font-size:clamp(17px,5vw,22px)}
+  .pstats,.at-vals,.vals-grid,.singles-grid,.mw-grid{grid-template-columns:1fr}
+  .cs-mets{flex-direction:column;gap:18px}
+  .hero-acts{flex-direction:column;align-items:stretch;width:100%}
+  .hero-content{padding-bottom:36px}
+  .cf-wrap{padding:30px 20px}
+  .ft-top{grid-template-columns:1fr}
+  .cs-main{padding:32px 22px}
+  .cs-side{padding:28px 22px}
+  .cs-quote{padding:18px 22px}
+  .fc{padding:32px 22px}
+  .vi{padding:26px 20px}
+  .pstat{padding:20px 16px}
+  .svc-card{padding:30px 24px 26px}
+  .mission-blk{padding:32px 24px}
+  .vision-blk{padding:22px 24px}
+  .how-blk{padding:18px 18px}
+  .ci-quote{padding:18px 18px}
+  .cta-in p{font-size:15px}
+  .proc-st{font-size:14px}
+  .or-r h4{font-size:18px}
+  .founders-grid{grid-template-columns:1fr}
+  .or{padding:36px 0}
+  .contact-sec{padding:52px var(--g)}
+  .proc-bar{padding:20px var(--g)}
+  .cta-sec{padding:64px var(--g)}
+  .mb-txt{font-size:clamp(17px,4.5vw,24px)}
+}
+
+/* 400 — very small phones */
+@media(max-width:400px){
+  .nav-links.open{padding:12px 16px 24px}
+  .hero-acts .btn-gold{padding:14px 24px}
+  .cs-main{padding:28px 18px}
+  .cs-side{padding:24px 18px}
+  .cf-wrap{padding:24px 16px}
+  .fc{padding:28px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-w">
+    <div class="nav-logo" onclick="go('home')" style="cursor:pointer">
+      <svg class="logo-svg" viewBox="0 0 300.613 87.114" fill="#F2A800" xmlns="http://www.w3.org/2000/svg"><path d="M297.873,75.311a2.155,2.155,0,0,0,1.941-3.742C259.7,38.724,229.106,14.386,217.8,8.809,211.941,5.92,200.783.4,189.424,4.538l-.234.086c-14.778,5.469-22.462,17.546-25.106,21.819a86.906,86.906,0,0,0-7.141,15.289c-1.768,4.576-2.181,6.468-4.3,11.907-2.43,6.238-4.771,11.2-5.756,13.117a80.4,80.4,0,0,1-12.375,17.272,1.831,1.831,0,0,0,2.245,2.838,62.683,62.683,0,0,0,10.514-7.347A67.64,67.64,0,0,0,161.65,61.842c8.493-16.274,11.53-22.11,16.645-26.265,8.843-7.185,18.643-6.055,34.6-1.225C228.773,39.159,291.3,72.771,297.873,75.311Z"/><path d="M2.74,11.8A2.154,2.154,0,0,0,.8,15.545C40.912,48.39,71.507,72.728,82.815,78.305c5.857,2.889,17.015,8.411,28.375,4.271l.233-.086c14.778-5.469,22.462-17.545,25.107-21.818a86.872,86.872,0,0,0,7.14-15.29c1.769-4.575,2.181-6.468,4.3-11.907,2.43-6.238,4.771-11.2,5.756-13.117A80.4,80.4,0,0,1,166.1,3.086,1.831,1.831,0,0,0,163.856.248,62.683,62.683,0,0,0,153.342,7.6a67.648,67.648,0,0,0-14.379,17.678c-8.493,16.273-11.53,22.109-16.644,26.265-8.844,7.185-18.644,6.054-34.6,1.224C71.84,47.955,9.312,14.343,2.74,11.8Z"/></svg>
+      <div class="nwm">StopPress<small>Digital</small></div>
+    </div>
+    <ul class="nav-links" id="nl">
+      <li class="nav-item"><button class="nbtn" id="nb-work" onclick="go('work')"><span class="np">Work</span><span class="ns">The goods</span></button></li>
+      <li class="nav-item"><button class="nbtn" id="nb-services" onclick="go('services')"><span class="np">Services</span><span class="ns">What we do</span></button></li>
+      <li class="nav-item"><button class="nbtn" id="nb-about" onclick="go('about')"><span class="np">About</span><span class="ns">Who we are</span></button></li>
+      <li class="nav-item"><button class="nav-cta" onclick="go('contact')">Hello</button></li>
+    </ul>
+    <button class="nav-hbg" id="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <button class="gold-corner" onclick="go('home')" aria-label="Go to homepage"></button>
+    <div class="hero-content wrap">
+      <span class="hero-ey">Branding &amp; Marketing Studio — Orlando, FL</span>
+      <h1>Become the brand<br>that makes people <em>stop.</em></h1>
+      <p class="hero-sub">We build brand identity, run marketing operations, and make it impossible for owner-operated businesses to be overlooked in their markets.</p>
+      <div class="hero-acts">
+        <button class="btn-gold" onclick="go('work')">See our work</button>
+        <button class="btn-ghost" onclick="go('contact')">Start a conversation</button>
+      </div>
+    </div>
+    <div class="scroll-h"><div class="scroll-l"></div><span class="scroll-w">Scroll</span></div>
+  </section>
+
+  <div class="phi-bar"><div class="phi-in"><span class="phi-st">"Simple is smart. Specific is everything."</span><span class="phi-tg">Senior thinking, senior execution, start to finish.</span></div></div>
+
+  <section class="svc-sec">
+    <div class="wrap">
+      <div class="svc-hd">
+        <div><span class="lbl">What We Do</span><h2>Fewer clients.<br>Better work.</h2></div>
+        <div class="svc-hd-r"><p>Every engagement is built for the actual business in front of us. The work has to be specific to be useful; something that could've been written for anyone ends up useful to no one. We take on less so that everything we deliver is something we'd put our names on in public.</p></div>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card rv" onclick="go('services')">
+          <div class="svc-n">01</div><div class="svc-nm">Brand Foundation</div>
+          <p class="svc-d">The complete brand identity: strategy, positioning, visual system, and the logic that makes every future brand decision faster. Built once, built right, built to last.</p>
+          <span class="svc-ar">Learn more</span>
+        </div>
+        <div class="svc-card rv d1" onclick="go('services')">
+          <div class="svc-n">02</div><div class="svc-nm">Brand Communications</div>
+          <p class="svc-d">Ongoing marketing that actually runs: email, social content, campaign execution, and performance reporting. Consistent, on-brand, month after month. We ask for a six-month commitment because the work compounds; the results in month four look different from month one.</p>
+          <span class="svc-ar">Learn more</span>
+        </div>
+        <div class="svc-card rv d2" onclick="go('services')">
+          <div class="svc-n">03</div><div class="svc-nm">Launch &amp; Growth</div>
+          <p class="svc-d">For the moment when everything needs to be ready at once. Brand, campaign, and communications built together, launched together, and measured together across twelve to sixteen weeks.</p>
+          <span class="svc-ar">Learn more</span>
+        </div>
+      </div>
+      <div class="svc-more"><button class="btn-out" onclick="go('services')">All services, including single-deliverable options</button></div>
+    </div>
+  </section>
+
+  <section class="proof-sec">
+    <div class="proof-in wrap">
+      <div class="proof-l">
+        <span class="lbl">Proof of Work</span>
+        <h2>The work either changes something or it doesn't.</h2>
+        <p>We built Exuma Fragrance Co. from zero. Designed the brand, ran the marketing, and stayed in long enough for the numbers to tell the real story. 1,175 orders in the first year. 2026 tracking nearly 60% ahead of that. The work is still compounding and that is the standard every new engagement gets held to.</p>
+        <button class="btn-gold" onclick="go('work')" style="margin-top:8px">Read the case study</button>
+      </div>
+      <div>
+        <div class="pstats">
+          <div class="pstat rv"><span class="pstat-n">1,175</span><span class="pstat-l">Orders in the brand's first full year with StopPress</span></div>
+          <div class="pstat rv d1"><span class="pstat-n">+92%</span><span class="pstat-l">YoY growth, Jan–Apr 2026 vs the same period in 2025</span></div>
+          <div class="pstat rv d2"><span class="pstat-n">~1,900</span><span class="pstat-l">Projected full-year 2026 orders — approximately 60% above Year One</span></div>
+          <div class="pstat rv d3"><span class="pstat-n">100%</span><span class="pstat-l">Senior work, start to finish. Both principals, every stage.</span></div>
+        </div>
+        <div class="proof-cb">Client: Exuma Fragrance Co. &nbsp;|&nbsp; DTC Product Brand &nbsp;|&nbsp; 2023–Present</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="at-sec">
+    <div class="at-grid wrap">
+      <div class="at-l">
+        <span class="lbl">Who We Are</span>
+        <h2>Two people. One studio. That's the entire structure.</h2>
+        <p>Ange Das and Simon Fevrier built StopPress Digital on one conviction: the people who sell the work should be the people who build it. No account managers, no overflow passed down the chain. When you hire StopPress, you're hiring us directly. The structure was built around that belief from day one.</p>
+        <p>Between the two of us, the scope covers brand strategy, visual identity, photography, email marketing, social content, campaign analytics, and everything in between. One point of contact from the first call to the final delivery.</p>
+        <button class="btn-out" onclick="go('about')" style="margin-top:12px">About the studio</button>
+      </div>
+      <div class="at-vals">
+        <div class="vcard rv"><div class="vcard-t">Craft over volume</div><p class="vcard-b">Fewer clients, deeper work. Every deliverable has both our names on it.</p></div>
+        <div class="vcard rv d1"><div class="vcard-t">Accountability without layers</div><p class="vcard-b">Your first conversation and your last are with the same two people.</p></div>
+        <div class="vcard rv d2"><div class="vcard-t">Specificity</div><p class="vcard-b">Generic output is expensive. When you read the strategy back, it should be unmistakably yours.</p></div>
+        <div class="vcard rv d3"><div class="vcard-t">Honesty over comfort</div><p class="vcard-b">We tell you what you need to hear. A softened audit is useless. We don't do useless.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectors-sec">
+    <div class="wrap">
+      <div class="sec-hd"><div><span class="lbl">Who We Serve</span><h3>Owner-operated businesses across Central Florida and beyond.</h3></div></div>
+      <div class="stags">
+        <span class="stag">Home Services</span><span class="stag">Medical &amp; Wellness</span><span class="stag">Boutique Retail</span><span class="stag">Real Estate</span><span class="stag">Restaurants &amp; Hospitality</span><span class="stag">Fitness &amp; Wellness Studios</span><span class="stag">Professional Services</span><span class="stag">DTC Product Brands</span><span class="stag">Legal &amp; Financial</span><span class="stag">Technology &amp; SaaS</span><span class="stag">Coaching &amp; Consulting</span><span class="stag">E-Commerce</span><span class="stag">Beauty &amp; Personal Care</span><span class="stag">Events &amp; Experiences</span><span class="stag">Nonprofit &amp; Social Impact</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-sec">
+    <div class="cta-in">
+      <span class="lbl">Let's Talk</span>
+      <h2>Your brand has a gap.<br>We know how to close it.</h2>
+      <p>Owner-operated business, real marketing problem, budget to solve it properly? Start here. The discovery call is 30 minutes and free.</p>
+      <div class="cta-btns">
+        <button class="btn-gold" onclick="go('contact')">Start a conversation</button>
+        <button class="btn-ghost" onclick="go('services')">See our services</button>
+      </div>
+    </div>
+  </section>
+  <div class="ft-inject"></div>
+</div>
+
+<!-- ═══ WORK ═══ -->
+<div class="page" id="page-work">
+  <section class="pg-hero">
+    <button class="gold-corner" onclick="go('home')" aria-label="Go to homepage"></button>
+    <div class="pg-hi wrap">
+      <span class="lbl">Work</span>
+      <h1>The goods.</h1>
+      <p class="pg-sub">Every project here changed something measurable for the client. That's the only kind of work we're interested in building.</p>
+    </div>
+  </section>
+
+  <section class="cs-sec">
+    <div class="wrap">
+      <span class="lbl" style="margin-bottom:32px">Featured Case Study</span>
+      <div class="cs-grid">
+        <div class="cs-main">
+          <span class="cs-tag">DTC Product Brand</span>
+          <h2>Exuma<br>Fragrance Co.</h2>
+          <p>Built from zero. No brand, no audience, no measurable prior presence. We built the complete identity system, ran the marketing, and stayed in long enough for the numbers to tell the real story. The curve started moving in H2 2025 and it hasn't stopped.</p>
+          <div class="cs-mets">
+            <div><span class="csm-n">1,175</span><span class="csm-l">2025 Full-Year Orders</span></div>
+            <div><span class="csm-n">+92%</span><span class="csm-l">YoY Growth Jan–Apr 2026</span></div>
+            <div><span class="csm-n">~1,900</span><span class="csm-l">Projected 2026 Orders</span></div>
+          </div>
+        </div>
+        <div class="cs-side">
+          <div>
+            <span class="cs-sl">The Challenge</span>
+            <h4 class="cs-st">A fragrance brand with real ambition, no identity, and a market that doesn't forgive a weak first impression.</h4>
+            <p>Before StopPress came in, the business was tracking around 70 orders a month — roughly what the data shows through the first half of 2025. No brand system, no consistent marketing, no infrastructure to grow from. The challenge was to build a brand that could hold its own against established DTC players, then run marketing that compounds over time. Everything had to be right from launch because in DTC, there's no second first impression.</p>
+          </div>
+          <div>
+            <span class="cs-sl">The Trajectory</span>
+            <p>H1 2025 averaged 71.5 orders per month. By H2 2025 — as the brand identity bedded in and the marketing found its rhythm — that number climbed to an average of 124 per month. 2026 entered with that momentum already built. January opened at 143. The first four months of 2026 totalled 534 orders, 92% ahead of the same period in 2025. Full-year 2026 is projecting approximately 1,900 orders, roughly 60% above Year One.</p>
+          </div>
+          <div>
+            <span class="cs-sl">Services Delivered</span>
+            <div class="cs-svcs">
+              <span class="cs-svc">Brand Strategy</span><span class="cs-svc">Visual Identity</span><span class="cs-svc">Photography</span><span class="cs-svc">Email Marketing</span><span class="cs-svc">Social Content</span><span class="cs-svc">Campaign Analytics</span>
+            </div>
+          </div>
+          <div>
+            <span class="cs-sl">Visit the Brand</span>
+            <div class="cs-links">
+              <a href="https://exumafragrance.com/" target="_blank" rel="noopener" class="cs-link">
+                <span class="cs-link-icon">↗</span>
+                <span>Website — exumafragrance.com</span>
+              </a>
+              <a href="https://www.etsy.com/shop/ExumaFragranceCo" target="_blank" rel="noopener" class="cs-link">
+                <span class="cs-link-icon">↗</span>
+                <span>Etsy Shop</span>
+              </a>
+              <a href="https://www.instagram.com/exumafragranceco/" target="_blank" rel="noopener" class="cs-link">
+                <span class="cs-link-icon">↗</span>
+                <span>Instagram — @exumafragranceco</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cs-quote">"The brand and marketing work produced a 92% year-over-year increase in orders." — <strong>Exuma Fragrance Co. Leadership</strong></div>
+    </div>
+  </section>
+
+  <section class="mw-sec">
+    <div class="wrap">
+      <div class="mw-hd"><h3>More work incoming.</h3></div>
+      <div class="mw-grid">
+        <div class="mw-card"><span class="mw-lbl">Home Services Client</span></div>
+        <div class="mw-card"><span class="mw-lbl">Medical &amp; Wellness</span></div>
+        <div class="mw-card"><span class="mw-lbl">Boutique Retail</span></div>
+      </div>
+      <p style="margin-top:32px;max-width:440px">New case studies are built with every completed Brand Foundation engagement. The portfolio grows with the studio.</p>
+    </div>
+  </section>
+
+  <section class="cta-sec">
+    <div class="cta-in">
+      <span class="lbl">Your Turn</span>
+      <h2>Ready to be the next case study?</h2>
+      <p>Let's start with a conversation about your business and what you're trying to build.</p>
+      <div class="cta-btns"><button class="btn-gold" onclick="go('contact')">Start a conversation</button></div>
+    </div>
+  </section>
+  <div class="ft-inject"></div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<div class="page" id="page-services">
+  <section class="pg-hero">
+    <button class="gold-corner" onclick="go('home')" aria-label="Go to homepage"></button>
+    <div class="pg-hi wrap">
+      <span class="lbl">Services</span>
+      <h1>What we do.</h1>
+      <p class="pg-sub">Three core engagements and a menu of single-deliverable options. Every engagement starts with your actual business and builds from there. The right starting point depends on where you are, and we'll tell you honestly which one it is.</p>
+    </div>
+  </section>
+
+  <section class="core-sec">
+    <div class="wrap">
+      <span class="lbl" style="margin-bottom:48px">Core Engagements</span>
+
+      <div class="or">
+        <div><span class="or-num">01 —</span><h3 class="or-title">Brand Foundation</h3></div>
+        <div class="or-r">
+          <h4>The complete brand identity. Built once, built right.</h4>
+          <p>This is where most businesses should start. The deliverable is a complete brand identity system: strategy, positioning, visual language, naming architecture, and the internal logic that makes every future brand decision easier and faster. Six to eight weeks of real back-and-forth. We get into the business before we start building anything.</p>
+          <p>Suited for: businesses launching, businesses rebranding, and businesses operating without a real brand system who are starting to feel the ceiling it creates.</p>
+          <div class="or-tags"><span class="or-tag">Brand Strategy &amp; Positioning</span><span class="or-tag">Visual Identity System</span><span class="or-tag">Logo &amp; Mark Development</span><span class="or-tag">Color &amp; Typography</span><span class="or-tag">Brand Voice &amp; Messaging</span><span class="or-tag">Brand Guidelines Document</span><span class="or-tag">Application Mockups</span></div>
+        </div>
+      </div>
+
+      <div class="or">
+        <div><span class="or-num">02 —</span><h3 class="or-title">Brand Communications</h3></div>
+        <div class="or-r">
+          <h4>Ongoing marketing that actually runs. Month after month.</h4>
+          <p>The retainer engagement: email marketing, social content production and scheduling, campaign analytics, and performance reporting. Consistent output on a defined cadence, reviewed before it ships, managed from strategy through deployment. The six-month minimum exists because real marketing results take time to surface, and a client who leaves before that curve breaks hasn't seen what the work can actually do.</p>
+          <p>Suited for: businesses with an audience to nurture, a sales pipeline to feed, or a presence to build. If you have customers, you have a reason to be in their inbox.</p>
+          <div class="or-tags"><span class="or-tag">Email Marketing Strategy</span><span class="or-tag">Email Copywriting &amp; Design</span><span class="or-tag">Social Content Calendar</span><span class="or-tag">Content Production &amp; Scheduling</span><span class="or-tag">Analytics &amp; Reporting</span><span class="or-tag">Monthly Strategy Call</span></div>
+        </div>
+      </div>
+
+      <div class="or">
+        <div><span class="or-num">03 —</span><h3 class="or-title">Launch &amp; Growth</h3></div>
+        <div class="or-r">
+          <h4>For the moment when everything needs to be ready at once.</h4>
+          <p>The highest-investment engagement. For a business opening a new location, entering a new market, releasing a new product, or undergoing a transformation significant enough that brand and marketing need to move in complete coordination. Built together, launched together, measured together. Twelve to sixteen weeks, phased delivery, phased payment.</p>
+          <p>Suited for: businesses making a significant move where the cost of an uncoordinated launch is real. The brief is large. The stakes match it.</p>
+          <div class="or-tags"><span class="or-tag">Full Brand Foundation</span><span class="or-tag">Launch Campaign Strategy</span><span class="or-tag">Campaign Creative</span><span class="or-tag">Photography &amp; Content</span><span class="or-tag">Email Launch Sequence</span><span class="or-tag">Social Launch Content</span><span class="or-tag">Performance Metrics &amp; Reporting</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="singles-sec">
+    <div class="wrap">
+      <span class="lbl">Single Deliverables</span>
+      <h2>The right entry point<br>for every situation.</h2>
+      <p style="max-width:520px;margin-top:12px">Sometimes one specific thing is the thing you need. These engagements are designed to solve a defined problem first, demonstrate the quality of the work second, and let the relationship find its own direction from there.</p>
+      <div class="singles-grid">
+        <div class="sc rv"><span class="sc-tag">Visual</span><h4 class="sc-t">Photography Session</h4><p class="sc-d">Brand, product, and portrait photography. Directed, executed, and delivered with the same care as every other engagement. Real estate agents, restaurateurs, and product brands book this first, often, and return repeatedly.</p></div>
+        <div class="sc rv d1"><span class="sc-tag">Strategy</span><h4 class="sc-t">Brand Audit</h4><p class="sc-d">An honest assessment of where your brand is, where the gaps are, and what it would take to close them. The findings are not softened. The most useful thing to read before you spend money on anything else.</p></div>
+        <div class="sc rv d2"><span class="sc-tag">Design</span><h4 class="sc-t">Capabilities Deck</h4><p class="sc-d">The document you hand to partners, investors, and prospective clients. Designed to match your brand, written to communicate your actual value, structured to lead someone through the decision you want them to make.</p></div>
+        <div class="sc rv d3"><span class="sc-tag">Marketing</span><h4 class="sc-t">Email Sequence</h4><p class="sc-d">Welcome flows, nurture sequences, and product launch emails with strategy behind every word. Copy built around your audience and the specific conversion you're after. We write each sequence from the actual business context outward.</p></div>
+        <div class="sc rv"><span class="sc-tag">Marketing</span><h4 class="sc-t">Social Content Calendar</h4><p class="sc-d">A full month of planned, written, and production-ready social content. Strategic enough to build something. Consistent enough to actually run. The kind of calendar that makes the next month easier.</p></div>
+        <div class="sc rv d1"><span class="sc-tag">Design</span><h4 class="sc-t">Pitch Deck</h4><p class="sc-d">For founders and teams preparing to raise capital or make a significant partnership pitch. We care about the narrative as much as the design; the logic of the argument, how it moves someone from slide one to a decision. The story has to hold up under the slides.</p></div>
+        <div class="sc rv d2"><span class="sc-tag">Digital</span><h4 class="sc-t">Website</h4><p class="sc-d">Three tiers: Starter, Standard, and Full. Each one scoped to what your business actually needs right now, so you're investing in the right engagement and nothing more.</p></div>
+        <div class="sc rv d3" onclick="go('contact')"><span class="sc-tag">Discovery</span><h4 class="sc-t">Not sure where to start?</h4><p class="sc-d">Start with a conversation. We'll ask the right questions and tell you, honestly, which engagement solves the most pressing problem first. Thirty minutes. Free. No pitch involved.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="proc-bar"><div class="proc-in wrap"><span class="proc-st">"We don't sell. We diagnose. The right recommendation starts with the right questions."</span><span class="proc-nt">Every proposal is specific. Always.</span></div></div>
+
+  <section class="cta-sec">
+    <div class="cta-in">
+      <span class="lbl">Let's Talk</span>
+      <h2>Tell us what you're building.</h2>
+      <p>The discovery call is 30 minutes and free. We'll tell you which engagement fits, what it would accomplish, and build a specific proposal within 48 hours if there's a match.</p>
+      <div class="cta-btns"><button class="btn-gold" onclick="go('contact')">Book a discovery call</button></div>
+    </div>
+  </section>
+  <div class="ft-inject"></div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div class="page" id="page-about">
+  <section class="pg-hero">
+    <button class="gold-corner" onclick="go('home')" aria-label="Go to homepage"></button>
+    <div class="pg-hi wrap">
+      <span class="lbl">About</span>
+      <h1>Two people doing<br>the work themselves.</h1>
+      <p class="pg-sub">StopPress Digital is a boutique branding and marketing studio built on one conviction: owner-operated businesses are the most underserved clients in the marketing industry, and they deserve senior-level thinking without the agency overhead that usually comes with it.</p>
+    </div>
+  </section>
+
+  <section class="story-sec">
+    <div class="story-grid wrap">
+      <div class="story-l">
+        <span class="lbl">The Studio</span>
+        <h2>The name says everything.</h2>
+        <p>StopPress. It's a term from print journalism: the moment when everything stops because something important just happened. That's the kind of work we build for the businesses we serve. Brand and marketing that makes people stop, pay attention, and remember.</p>
+        <p>Lean by design. The principals do the work themselves, on every engagement, at every stage. When you hire StopPress Digital, you hire the people who built the thing that made you reach out.</p>
+      </div>
+      <div>
+        <div class="mission-blk">
+          <span class="mlbl">Mission</span>
+          <p class="mtext">"To build brands that work, run marketing that delivers, and make it impossible for owner-operated businesses to be overlooked in their markets."</p>
+        </div>
+        <div class="vision-blk">
+          <span class="mlbl">Vision</span>
+          <p>To become the most trusted branding and marketing studio for owner-operated businesses across Central Florida, and to build a body of work that makes other agencies take notice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="founders-sec">
+    <div class="wrap">
+      <span class="lbl">The Team</span>
+      <h2>Who you're actually hiring.</h2>
+      <div class="founders-grid">
+        <div class="fc rv">
+          <span class="fc-role">Founder &amp; Creative Director</span>
+          <h3 class="fc-name">Ange Das</h3>
+          <p class="fc-bio">Ange is a communications strategist and creative director with five years of experience spanning brand identity, executive communications, lifecycle email marketing, social content production, and professional photography. He has built brands from concept to market and managed communications infrastructure across global multi-location organizations.</p>
+          <p class="fc-bio">His work has produced real, measurable outcomes. The Exuma Fragrance Co. brand, built entirely under his creative direction, reached 1,175 orders in its first full year, with company leadership attributing a 92% year-over-year order growth directly to the brand and marketing work he produced. At StopPress Digital, Ange holds final creative authority on every deliverable. Nothing ships without his review.</p>
+          <div class="fc-focus">
+            <span class="fc-fi">Brand strategy, positioning, and identity system development</span>
+            <span class="fc-fi">Photography: direction, execution, and post-production</span>
+            <span class="fc-fi">Creative direction and quality control on all deliverables</span>
+            <span class="fc-fi">Business direction, pricing, and growth strategy</span>
+          </div>
+        </div>
+        <div class="fc rv d2">
+          <span class="fc-role">Co-Founder &amp; COO</span>
+          <h3 class="fc-name">Simon Fevrier</h3>
+          <p class="fc-bio">Simon is a brand strategist and marketing operator whose background covers email marketing, content strategy, campaign analytics, social channel management, and client-facing project coordination. He brings operational discipline to every engagement: the kind that keeps timelines intact, deliverables consistent, and clients informed before they have to ask.</p>
+          <p class="fc-bio">He owns the execution side of every ongoing engagement and co-leads strategy across all client work. If Ange is the creative engine, Simon is the operating system. The two functions were designed to run together, and they do.</p>
+          <div class="fc-focus">
+            <span class="fc-fi">Email marketing: strategy, copywriting, design, and deployment</span>
+            <span class="fc-fi">Social content calendar: planning, production, and scheduling</span>
+            <span class="fc-fi">Campaign analytics, performance reporting, and optimization</span>
+            <span class="fc-fi">Platform management: HubSpot, Klaviyo, Mailchimp, Meta Business Suite</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vals-sec">
+    <div class="wrap">
+      <span class="lbl">Core Values</span>
+      <h2>What we actually believe.</h2>
+      <div class="vals-grid">
+        <div class="vi rv"><div class="vi-n">01</div><div class="vi-nm">Craft over volume</div><p class="vi-d">Fewer clients, better work. Every deliverable that leaves this studio is something we'd put our names on publicly. If it isn't, it doesn't go out.</p></div>
+        <div class="vi rv d1"><div class="vi-n">02</div><div class="vi-nm">Accountability without layers</div><p class="vi-d">The people who sell the work are the people who build it. A client's first conversation and their last are with the same two people.</p></div>
+        <div class="vi rv d2"><div class="vi-n">03</div><div class="vi-nm">Specificity</div><p class="vi-d">Generic advice and generic output are two of the most expensive things a small business can pay for. We don't produce either. Every strategy is built for the actual business in front of us.</p></div>
+        <div class="vi rv d3"><div class="vi-n">04</div><div class="vi-nm">Honesty over comfort</div><p class="vi-d">We tell clients what they need to hear. A brand audit that softens every critique is useless. A proposal that overpromises is worse than no proposal at all.</p></div>
+        <div class="vi rv d4"><div class="vi-n">05</div><div class="vi-nm">Long relationships</div><p class="vi-d">The best clients are the ones who grow with us. We build every engagement with the next one in mind. Retention is simpler than acquisition and twice as valuable.</p></div>
+        <div class="vi rv d5"><div class="vi-n">06</div><div class="vi-nm">Results, not reports</div><p class="vi-d">One real outcome per client per quarter: revenue, bookings, list growth, leads. If we can't point to one, we haven't done our job. That's the metric that matters most.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mission-band">
+    <div class="mb-in">
+      <span class="mb-lbl">Why This Exists</span>
+      <p class="mb-txt">"Owner-operated businesses are underserved by the existing marketing industry. They need senior thinking, consistent execution, and a team that shows up. StopPress Digital is built to be exactly that, and nothing more complicated."</p>
+    </div>
+  </div>
+
+  <section class="cta-sec">
+    <div class="cta-in">
+      <span class="lbl">Let's Get Started</span>
+      <h2>Sound like the right fit?</h2>
+      <p>The discovery call is 30 minutes, free, and focused on your business. We ask good questions and give you a straight answer about whether we're the right team for the job.</p>
+      <div class="cta-btns">
+        <button class="btn-gold" onclick="go('contact')">Start a conversation</button>
+        <button class="btn-ghost" onclick="go('work')">See our work first</button>
+      </div>
+    </div>
+  </section>
+  <div class="ft-inject"></div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="page" id="page-contact">
+  <section class="pg-hero">
+    <button class="gold-corner" onclick="go('home')" aria-label="Go to homepage"></button>
+    <div class="pg-hi wrap">
+      <span class="lbl">Contact</span>
+      <h1>Let's talk about<br>your business.</h1>
+      <p class="pg-sub">The discovery call is 30 minutes and free. We'll ask focused questions about where you are, what you're building, and what's standing in the way. One of us responds within one business day.</p>
+    </div>
+  </section>
+
+  <section class="contact-sec">
+    <div class="wrap">
+      <div class="contact-grid">
+
+        <!-- FORM -->
+        <div class="cf-wrap">
+          <h3 class="cf-title">Start here.</h3>
+          <p class="cf-sub">Tell us a little about your business and what you're working on. We'll come to the call having read it, ready to ask the right questions.</p>
+
+          <form id="inq-form" action="https://formsubmit.co/stoppressdigital@gmail.com" method="POST" target="fs-iframe">
+            <input type="hidden" name="_subject" value="New Inquiry — StopPress Digital Website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://stoppressdigital.com">
+            <div class="ff"><label for="fn">Your Name</label><input type="text" id="fn" name="name" placeholder="First and last name" required></div>
+            <div class="ff"><label for="fb">Business Name</label><input type="text" id="fb" name="business" placeholder="Your company or brand" required></div>
+            <div class="ff"><label for="fe">Email Address</label><input type="email" id="fe" name="email" placeholder="you@yourbusiness.com" required></div>
+            <div class="ff"><label for="fp">Phone Number</label><input type="tel" id="fp" name="phone" placeholder="+1 (000) 000-0000"></div>
+            <div class="ff">
+              <label for="fs">Industry</label>
+              <select id="fs" name="sector">
+                <option value="" disabled selected>Select your industry</option>
+                <option>Home Services</option><option>Medical &amp; Wellness</option><option>Boutique Retail</option><option>Real Estate</option><option>Restaurants &amp; Hospitality</option><option>Fitness &amp; Wellness</option><option>Professional Services (Law / Finance)</option><option>DTC Product Brand</option><option>Technology / SaaS</option><option>E-Commerce</option><option>Beauty &amp; Personal Care</option><option>Coaching &amp; Consulting</option><option>Events &amp; Experiences</option><option>Other</option>
+              </select>
+            </div>
+            <div class="ff">
+              <label for="fi">What Are You Looking For?</label>
+              <select id="fi" name="interest">
+                <option value="" disabled selected>Select an area of interest</option>
+                <option>Brand Foundation (Identity &amp; Strategy)</option><option>Brand Communications (Ongoing Marketing)</option><option>Launch &amp; Growth</option><option>Website</option><option>Photography</option><option>Brand Audit</option><option>Capabilities or Pitch Deck</option><option>Email Sequence or Social Content</option><option>Not sure yet — help me figure that out</option>
+              </select>
+            </div>
+            <div class="ff"><label for="fm">Tell Us More</label><textarea id="fm" name="message" placeholder="What's the most pressing brand or marketing problem your business has right now?"></textarea></div>
+            <button type="button" class="f-submit" id="f-btn" onclick="handleFormClick()">Send My Inquiry</button>
+          </form>
+          <!-- Hidden iframe absorbs the form POST response so the page never navigates away -->
+          <iframe name="fs-iframe" style="display:none" aria-hidden="true"></iframe>
+
+          <div class="f-success" id="f-success">
+            <div class="f-check">✓</div>
+            <h3>We've got it.</h3>
+            <p>One of us will be in touch within one business day. Come to the call ready to talk about your business. We'll come prepared to ask the right questions.</p>
+          </div>
+
+          <p class="f-note" id="f-note">We respond to every inquiry within one business day. No automated replies, no junior screens.</p>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div class="ci">
+          <div class="ci-blk">
+            <span class="ci-lbl">Direct Contact</span>
+            <div class="cp">
+              <div class="cp-nm">Ange Das</div>
+              <span class="cp-role">Founder &amp; Creative Director</span>
+              <span class="cp-d"><a href="mailto:angetdas@gmail.com">angetdas@gmail.com</a></span>
+              <span class="cp-d"><a href="tel:+17863622048">+1 (786) 362-2048</a></span>
+            </div>
+            <div class="cp">
+              <div class="cp-nm">Simon Fevrier</div>
+              <span class="cp-role">Co-Founder &amp; COO</span>
+              <span class="cp-d"><a href="mailto:simonfevrier123@gmail.com">simonfevrier123@gmail.com</a></span>
+              <span class="cp-d"><a href="tel:+19547017387">+1 (954) 701-7387</a></span>
+            </div>
+            <div class="cp">
+              <div class="cp-nm">Studio</div>
+              <span class="cp-role">General Inquiries</span>
+              <span class="cp-d"><a href="mailto:stoppressdigital@gmail.com">stoppressdigital@gmail.com</a></span>
+              <span class="cp-d"><a href="tel:+17863622048">+1 (786) 362-2048</a></span>
+            </div>
+          </div>
+
+          <div class="ci-blk">
+            <span class="ci-lbl">Location</span>
+            <span class="cp-d" style="font-size:18px;font-weight:500">Orlando, Florida</span>
+            <span class="cp-d" style="font-size:14px;color:var(--muted)">Central Florida's fastest-growing business market. We serve clients across the Orlando metro and beyond.</span>
+          </div>
+
+          <div class="ci-blk">
+            <span class="ci-lbl">How It Works</span>
+            <div class="how-blk">
+              <p>You send the form. One of us responds within one business day. We schedule a 30-minute discovery call at your convenience. We ask questions about your business, you tell us what's going on, and we tell you honestly whether we're the right fit and which engagement solves the most important problem first. If there's a match, we build a specific proposal within 48 hours.</p>
+            </div>
+            <div class="ci-quote">
+              <p>"We don't sell. We diagnose. And we'll tell you honestly which engagement is right, even if it isn't the biggest one."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div class="ft-inject"></div>
+</div>
+
+<script>
+/* ── LOGO SVG (reused) ── */
+const LOGO_SVG = `<svg class="logo-svg" viewBox="0 0 300.613 87.114" fill="#F2A800" xmlns="http://www.w3.org/2000/svg"><path d="M297.873,75.311a2.155,2.155,0,0,0,1.941-3.742C259.7,38.724,229.106,14.386,217.8,8.809,211.941,5.92,200.783.4,189.424,4.538l-.234.086c-14.778,5.469-22.462,17.546-25.106,21.819a86.906,86.906,0,0,0-7.141,15.289c-1.768,4.576-2.181,6.468-4.3,11.907-2.43,6.238-4.771,11.2-5.756,13.117a80.4,80.4,0,0,1-12.375,17.272,1.831,1.831,0,0,0,2.245,2.838,62.683,62.683,0,0,0,10.514-7.347A67.64,67.64,0,0,0,161.65,61.842c8.493-16.274,11.53-22.11,16.645-26.265,8.843-7.185,18.643-6.055,34.6-1.225C228.773,39.159,291.3,72.771,297.873,75.311Z"/><path d="M2.74,11.8A2.154,2.154,0,0,0,.8,15.545C40.912,48.39,71.507,72.728,82.815,78.305c5.857,2.889,17.015,8.411,28.375,4.271l.233-.086c14.778-5.469,22.462-17.545,25.107-21.818a86.872,86.872,0,0,0,7.14-15.29c1.769-4.575,2.181-6.468,4.3-11.907,2.43-6.238,4.771-11.2,5.756-13.117A80.4,80.4,0,0,1,166.1,3.086,1.831,1.831,0,0,0,163.856.248,62.683,62.683,0,0,0,153.342,7.6a67.648,67.648,0,0,0-14.379,17.678c-8.493,16.273-11.53,22.109-16.644,26.265-8.844,7.185-18.644,6.054-34.6,1.224C71.84,47.955,9.312,14.343,2.74,11.8Z"/></svg>`;
+
+/* ── FOOTER HTML ── */
+function footerHTML(){
+  return `<footer class="ft"><div class="wrap"><div class="ft-top">
+    <div class="ft-brand">
+      <div class="ft-logo nav-logo" onclick="go('home')" style="cursor:pointer;display:flex;align-items:center;gap:11px">${LOGO_SVG}<div class="nwm">StopPress<small>Digital</small></div></div>
+      <p class="ft-tag">"A brand that makes people stop, pay attention, and remember."</p>
+      <span class="ft-loc">Orlando, Florida</span>
+    </div>
+    <div class="ft-col"><h5>Navigate</h5><ul class="ft-nav"><li><button onclick="go('work')">Work</button></li><li><button onclick="go('services')">Services</button></li><li><button onclick="go('about')">About</button></li><li><button onclick="go('contact')">Contact</button></li></ul></div>
+    <div class="ft-col ft-contact"><h5>Say Hello</h5><a href="mailto:stoppressdigital@gmail.com">stoppressdigital@gmail.com</a><a href="tel:+17863622048">+1 (786) 362-2048</a><a href="https://www.stoppressdigital.com" target="_blank" rel="noopener">www.stoppressdigital.com</a></div>
+  </div><div class="ft-bot"><span class="ft-copy">© StopPress Digital LLC — Orlando, Florida. All rights reserved.</span><span class="ft-stamp">Branding &amp; Marketing Studio</span></div></div></footer>`;
+}
+
+/* inject footers */
+document.querySelectorAll('.ft-inject').forEach(el => el.outerHTML = footerHTML());
+
+/* ── PAGE ROUTING ── */
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg = document.getElementById('page-'+id);
+  if(!pg) return;
+  pg.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  /* inject footer if not present */
+  const fi = pg.querySelector('.ft-inject');
+  if(fi) fi.outerHTML = footerHTML();
+  /* update nav */
+  document.querySelectorAll('.nbtn').forEach(b=>b.classList.remove('active'));
+  const nb = document.getElementById('nb-'+id);
+  if(nb) nb.classList.add('active');
+  closeNav();
+  /* re-run reveals */
+  setTimeout(initReveal,80);
+  /* reset nav logo state for new page */
+  setTimeout(updateNav,0);
+}
+
+/* ── NAV SCROLL STATE ── */
+function updateNav(){
+  const scrolled = window.scrollY >= 50;
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', scrolled);
+  nav.classList.toggle('solid', scrolled);
+}
+window.addEventListener('scroll', updateNav, {passive:true});
+updateNav();
+
+/* ── MOBILE NAV ── */
+function toggleNav(){
+  document.getElementById('nl').classList.toggle('open');
+  document.getElementById('hbg').classList.toggle('open');
+}
+function closeNav(){
+  document.getElementById('nl').classList.remove('open');
+  document.getElementById('hbg').classList.remove('open');
+}
+
+/* ── SCROLL REVEAL ── */
+function initReveal(){
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target);}});
+  },{threshold:0.1,rootMargin:'0px 0px -32px 0px'});
+  document.querySelectorAll('.rv:not(.show)').forEach(el=>obs.observe(el));
+}
+initReveal();
+
+/* ── CONTACT FORM ── */
+function handleFormClick(){
+  const form = document.getElementById('inq-form');
+  const btn  = document.getElementById('f-btn');
+
+  /* Run native HTML5 validation — show inline error messages if invalid */
+  if(!form.checkValidity()){
+    form.reportValidity();
+    return;
+  }
+
+  /* Validation passed — give instant visual feedback before anything else */
+  btn.textContent = "It's on its way.";
+  btn.classList.add('confirmed');
+  btn.disabled = true;
+
+  /* Submit to the hidden iframe (native form POST — no CORS issues) */
+  form.submit();
+
+  /* Show full success state after a beat */
+  setTimeout(()=>{
+    form.style.display = 'none';
+    document.getElementById('f-note').style.display = 'none';
+    document.getElementById('f-success').classList.add('show');
+  }, 1600);
+}
+</script>
+</body>
+</html>
