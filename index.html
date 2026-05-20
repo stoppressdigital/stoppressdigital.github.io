@@ -1009,7 +1009,7 @@ initReveal();
    SETUP: Visit https://web3forms.com, enter stoppressdigital@gmail.com,
    copy the access key from your inbox, and paste it below.
    ─────────────────────────────────────────────────────── */
-const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+const WEB3FORMS_KEY = '2c9f298d-93f3-4354-a434-a7e888fb8347';
 
 async function handleFormClick(){
   const form = document.getElementById('inq-form');
@@ -1029,8 +1029,8 @@ async function handleFormClick(){
   /* Build the payload */
   const payload = {
     access_key:  WEB3FORMS_KEY,
-    subject:     'New Inquiry — StopPress Digital Website',
-    from_name:   'StopPress Digital Website',
+    subject:     'New Inquiry — StopPress Digital',
+    from_name:   'StopPress Digital',
     name:        document.getElementById('fn').value,
     business:    document.getElementById('fb').value,
     email:       document.getElementById('fe').value,
